@@ -1,0 +1,103 @@
+[gd_scene load_steps=19 format=3 uid="uid://b4vk2t65k0j1c"]
+
+[ext_resource type="Script" uid="uid://buoovdruqtxyl" path="res://addons/proto-csgs/scripts/proto_csg_cylinder_3d.gd" id="1_by1ap"]
+[ext_resource type="Script" uid="uid://cunbwjl0mulnd" path="res://addons/proto-csgs/scripts/proto_csg_mesh_3d.gd" id="2_2vtt2"]
+[ext_resource type="Script" uid="uid://ciqxkiyabd6kg" path="res://addons/proto-csgs/scripts/proto_csg_box_3d.gd" id="3_2vtt2"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_2vtt2"]
+noise_type = 5
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w1cnr"]
+noise = SubResource("FastNoiseLite_2vtt2")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_t2o2m"]
+noise_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_cdshi"]
+noise = SubResource("FastNoiseLite_t2o2m")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_iwu8f"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_r34pk"]
+noise = SubResource("FastNoiseLite_iwu8f")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ymqoy"]
+albedo_texture = SubResource("NoiseTexture2D_w1cnr")
+roughness_texture = SubResource("NoiseTexture2D_r34pk")
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_cdshi")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_w1cnr"]
+top_radius = 3.0
+bottom_radius = 6.0
+height = 7.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_w1cnr"]
+noise_type = 5
+frequency = 0.005
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_t2o2m"]
+noise = SubResource("FastNoiseLite_w1cnr")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_cdshi"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_iwu8f"]
+noise = SubResource("FastNoiseLite_cdshi")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_r34pk"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ymqoy"]
+noise = SubResource("FastNoiseLite_r34pk")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3uayo"]
+albedo_texture = SubResource("NoiseTexture2D_t2o2m")
+metallic = 1.0
+metallic_texture = SubResource("NoiseTexture2D_iwu8f")
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_ymqoy")
+
+[node name="ProtoCSGCylinder3D" type="CSGCylinder3D"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+radius = 8.5
+height = 52.0
+sides = 64
+material = SubResource("StandardMaterial3D_ymqoy")
+script = ExtResource("1_by1ap")
+metadata/_custom_type_script = "uid://buoovdruqtxyl"
+
+[node name="ProtoCSGCylinder3D2" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.375, 0)
+operation = 2
+radius = 8.0
+height = 34.5
+sides = 64
+script = ExtResource("1_by1ap")
+metadata/_custom_type_script = "uid://buoovdruqtxyl"
+
+[node name="ProtoCSGMesh3D" type="CSGMesh3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -1.23729e-06, 28.306, 0)
+operation = 2
+mesh = SubResource("CylinderMesh_w1cnr")
+script = ExtResource("2_2vtt2")
+metadata/_custom_type_script = "uid://cunbwjl0mulnd"
+
+[node name="ProtoCSGBox3D8" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.96263, 8.375, -0.0844996)
+size = Vector3(0.5, 34.917, 13)
+script = ExtResource("3_2vtt2")
+metadata/_custom_type_script = "uid://ciqxkiyabd6kg"
+
+[node name="ProtoCSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.04091, -4.87147, 0.4155)
+operation = 2
+size = Vector3(2, 62, 14)
+material = SubResource("StandardMaterial3D_3uayo")
+script = ExtResource("3_2vtt2")
+metadata/_custom_type_script = "uid://ciqxkiyabd6kg"
+
+[node name="ProtoCSGBox3D9" type="CSGBox3D" parent="ProtoCSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.34852, 0.500002, -1)
+operation = 2
+size = Vector3(0.5, 34.917, 20)
+script = ExtResource("3_2vtt2")
+metadata/_custom_type_script = "uid://ciqxkiyabd6kg"

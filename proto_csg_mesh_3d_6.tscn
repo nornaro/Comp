@@ -1,0 +1,230 @@
+[gd_scene load_steps=30 format=3 uid="uid://eqbkg64mx7el"]
+
+[ext_resource type="Script" uid="uid://cunbwjl0mulnd" path="res://addons/proto-csgs/scripts/proto_csg_mesh_3d.gd" id="1_3gww0"]
+[ext_resource type="Script" uid="uid://6i55vnlk056t" path="res://addons/proto-csgs/scripts/proto_csg_torus_3d.gd" id="2_erc8l"]
+[ext_resource type="Texture2D" uid="uid://fh0fij1gtnfm" path="res://new_noise_texture_2d.tres" id="2_vyvc1"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_6iypd"]
+radius = 5.0
+height = 30.0
+
+[sub_resource type="Gradient" id="Gradient_vyvc1"]
+offsets = PackedFloat32Array(0, 0.40796, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.935323, 0.935323, 0.935323, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6yxpk"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1h2xk"]
+color_ramp = SubResource("Gradient_vyvc1")
+noise = SubResource("FastNoiseLite_6yxpk")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uleel"]
+metallic = 1.0
+metallic_texture = SubResource("NoiseTexture2D_1h2xk")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_3ajrk"]
+radius = 1.0
+height = 20.0
+radial_segments = 6
+
+[sub_resource type="Gradient" id="Gradient_txj8g"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_erc8l"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_s613q"]
+seamless_blend_skirt = 1.0
+color_ramp = SubResource("Gradient_txj8g")
+noise = SubResource("FastNoiseLite_erc8l")
+
+[sub_resource type="Gradient" id="Gradient_i5arm"]
+interpolation_mode = 2
+colors = PackedColorArray(1, 1, 0, 0.588235, 1, 1, 0.698039, 0.588235)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_wc5p8"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jsk3o"]
+seamless = true
+color_ramp = SubResource("Gradient_i5arm")
+noise = SubResource("FastNoiseLite_wc5p8")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_18gsq"]
+albedo_color = Color(0.807963, 0.806057, 3.85046e-07, 1)
+albedo_texture = SubResource("NoiseTexture2D_s613q")
+emission_enabled = true
+emission = Color(0.380458, 0.378251, 0, 1)
+emission_energy_multiplier = 5.07
+emission_operator = 1
+emission_texture = SubResource("NoiseTexture2D_jsk3o")
+
+[sub_resource type="Animation" id="Animation_vyvc1"]
+resource_name = "light"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../ProtoCSGMesh3D7/Node3D/ProtoCSGMesh3D8:material")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.133333, 9.93333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [SubResource("StandardMaterial3D_18gsq"), SubResource("StandardMaterial3D_18gsq")]
+}
+
+[sub_resource type="Animation" id="Animation_6yxpk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../ProtoCSGMesh3D7/Node3D/ProtoCSGMesh3D8:material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("StandardMaterial3D_18gsq")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1h2xk"]
+_data = {
+&"RESET": SubResource("Animation_6yxpk"),
+&"light": SubResource("Animation_vyvc1")
+}
+
+[sub_resource type="Gradient" id="Gradient_e1mmp"]
+offsets = PackedFloat32Array(0.21393, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_k1rvx"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3paxw"]
+normalize = false
+color_ramp = SubResource("Gradient_e1mmp")
+noise = SubResource("FastNoiseLite_k1rvx")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1h2xk"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_uleel"]
+noise = SubResource("FastNoiseLite_1h2xk")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_e1mmp"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_k1rvx"]
+as_normal_map = true
+noise = SubResource("FastNoiseLite_e1mmp")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_02v73"]
+albedo_texture = SubResource("NoiseTexture2D_3paxw")
+metallic = 1.0
+metallic_texture = ExtResource("2_vyvc1")
+roughness_texture = SubResource("NoiseTexture2D_k1rvx")
+refraction_texture = SubResource("NoiseTexture2D_uleel")
+
+[sub_resource type="Animation" id="Animation_erc8l"]
+resource_name = "power"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vyvc1"]
+_data = {
+&"power": SubResource("Animation_erc8l")
+}
+
+[node name="ProtoCSGMesh3D6" type="CSGMesh3D"]
+mesh = SubResource("CapsuleMesh_6iypd")
+material = SubResource("StandardMaterial3D_uleel")
+script = ExtResource("1_3gww0")
+metadata/_custom_type_script = "uid://cunbwjl0mulnd"
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="ProtoCSGMesh3D8" type="CSGMesh3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 4.5)
+mesh = SubResource("CapsuleMesh_3ajrk")
+material = SubResource("StandardMaterial3D_18gsq")
+script = ExtResource("1_3gww0")
+metadata/_custom_type_script = "uid://cunbwjl0mulnd"
+
+[node name="ProtoCSGMesh3D9" type="CSGMesh3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, 3.5)
+mesh = SubResource("CapsuleMesh_3ajrk")
+material = SubResource("StandardMaterial3D_18gsq")
+script = ExtResource("1_3gww0")
+metadata/_custom_type_script = "uid://cunbwjl0mulnd"
+
+[node name="ProtoCSGMesh3D12" type="CSGMesh3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, 3.5)
+mesh = SubResource("CapsuleMesh_3ajrk")
+material = SubResource("StandardMaterial3D_18gsq")
+script = ExtResource("1_3gww0")
+metadata/_custom_type_script = "uid://cunbwjl0mulnd"
+
+[node name="ProtoCSGMesh3D10" type="CSGMesh3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 1, 0)
+mesh = SubResource("CapsuleMesh_3ajrk")
+material = SubResource("StandardMaterial3D_18gsq")
+script = ExtResource("1_3gww0")
+metadata/_custom_type_script = "uid://cunbwjl0mulnd"
+
+[node name="ProtoCSGMesh3D11" type="CSGMesh3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 1, 0)
+mesh = SubResource("CapsuleMesh_3ajrk")
+material = SubResource("StandardMaterial3D_18gsq")
+script = ExtResource("1_3gww0")
+metadata/_custom_type_script = "uid://cunbwjl0mulnd"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Node3D"]
+deterministic = true
+libraries = {
+&"": SubResource("AnimationLibrary_1h2xk")
+}
+autoplay = "light"
+
+[node name="ProtoCSGTorus3D" type="CSGTorus3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -13, 0)
+inner_radius = 5.0
+sides = 32
+material = SubResource("StandardMaterial3D_02v73")
+script = ExtResource("2_erc8l")
+metadata/_custom_type_script = "uid://6i55vnlk056t"
+
+[node name="ProtoCSGTorus3D2" type="CSGTorus3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13, 0)
+inner_radius = 5.0
+sides = 32
+material = SubResource("StandardMaterial3D_02v73")
+script = ExtResource("2_erc8l")
+metadata/_custom_type_script = "uid://6i55vnlk056t"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_vyvc1")
+}
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18, 0)
+light_color = Color(1, 0.572549, 0, 1)
+light_energy = 16.0
+light_negative = true
+light_specular = 16.0
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16, 0)
+light_color = Color(1, 0.572549, 0, 1)
+light_energy = 0.0
+light_indirect_energy = 16.0
+light_size = 1.0
+light_specular = 0.0
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -18, 0)
+light_color = Color(1, 0.572549, 0, 1)
+light_energy = 16.0
+light_negative = true
+light_specular = 16.0
+
+[node name="OmniLight3D5" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -16, 0)
+light_color = Color(1, 0.572549, 0, 1)
+light_energy = 0.0
+light_specular = 0.0
