@@ -8,6 +8,7 @@
 noise_type = 5
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w1cnr"]
+resource_name = "_albedo"
 noise = SubResource("FastNoiseLite_2vtt2")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_t2o2m"]
@@ -37,6 +38,7 @@ noise_type = 5
 frequency = 0.005
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_t2o2m"]
+resource_name = "_albedo"
 noise = SubResource("FastNoiseLite_w1cnr")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_cdshi"]
